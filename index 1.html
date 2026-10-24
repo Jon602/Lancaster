@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mio Gelato | Hand Made • Fresh • Delicious</title>
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              purple: '#8172b8',
+              'purple-dark': '#6a5ba1',
+              'purple-light': '#efeef8',
+              pink: '#f49795',
+              'pink-dark': '#e27f7d',
+              'pink-light': '#fdf0f0',
+              bg: '#fdfbfb',
+              surface: '#ffffff',
+              text: '#2d2b38',
+              muted: '#716e82'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            serif: ['Georgia', 'serif']
+          }
+        }
+      }
+    }
+  </script>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,400&family=Courier+Prime&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #fdfbfb;
+      color: #2d2b38;
+      overflow-x: hidden;
+    }
+
+    .font-brand-sub {
+      font-family: 'Courier Prime', monospace;
+    }
+
+    /* Custom Glassmorphism */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(244, 151, 149, 0.2);
+    }
+
+    .glass-nav {
+      background: rgba(253, 251, 251, 0.9);
+      backdrop-filter: blur(16px);
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #fdfbfb;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #8172b8;
+      border-radius: 5px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #6a5ba1;
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-brand-pink/30 selection:text-brand-purple-dark">
+
+  <!-- ================= HEADER & NAVIGATION ================= -->
+  <header class="fixed top-0 left-0 right-0 z-50 glass-nav border-b border-brand-pink/15 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20 sm:h-24">
+        
+        <!-- LOGO -->
+        <a href="#" class="flex items-center space-x-3 group">
+          <div class="w-10 h-12 sm:w-12 sm:h-14 flex-shrink-0 transition-transform duration-300 group-hover:scale-105">
+            <svg viewBox="0 0 100 130" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+              <rect x="12" y="10" width="14" height="36" rx="4" transform="rotate(-38 12 10)" fill="#8172b8" />
+              <path d="M 32,38 A 28,28 0 0,1 86,38 L 86,48 L 32,48 Z" fill="#f49795" />
+              <path d="M 20,48 A 28,28 0 0,1 74,48 L 74,58 L 20,58 Z" fill="#f49795" />
+              <polygon points="25,64 75,64 50,126" fill="#8172b8" />
+            </svg>
+          </div>
+          
+          <div class="flex flex-col">
+            <div class="flex items-baseline text-2xl sm:text-3xl font-light tracking-tight leading-none">
+              <span class="text-brand-purple font-normal">mio</span>
+              <span class="text-brand-pink font-light ml-0.5">gelato</span>
+            </div>
+            <div class="font-brand-sub text-[10px] sm:text-xs text-brand-purple tracking-wider mt-1 flex space-x-1 sm:space-x-2">
+              <span class="text-brand-pink">hand made</span>
+              <span>•</span>
+              <span class="text-brand-purple">fresh</span>
+              <span>•</span>
+              <span class="text-brand-purple">delicious</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
+          <a href="#menu" class="text-brand-text hover:text-brand-pink transition-colors">Menu & Flavors</a>
+          <a href="#craft" class="text-brand-text hover:text-brand-purple transition-colors">Our Craft</a>
+          <a href="#locations" class="text-brand-text hover:text-brand-pink transition-colors">Locations</a>
+        </nav>
+
+        <!-- Right Side Action -->
+        <div class="flex items-center space-x-3">
+          <a href="#locations" class="hidden sm:inline-flex items-center justify-center px-5 py-2.5 rounded-full text-sm font-medium text-white bg-brand-pink hover:bg-brand-pink-dark shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-0.5">
+            Visit Us
+          </a>
+
+          <!-- Mobile menu toggle button -->
+          <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg text-brand-text hover:bg-brand-purple-light focus:outline-none">
+            <i class="fa-solid fa-bars text-xl"></i>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Mobile Dropdown Menu -->
+    <div id="mobile-menu" class="hidden md:hidden border-b border-brand-pink/10 bg-white/95 backdrop-blur-md px-4 pt-2 pb-6 space-y-3">
+      <a href="#menu" class="mobile-link block px-3 py-2 rounded-xl text-base font-medium text-brand-text hover:bg-brand-pink-light hover:text-brand-pink">Menu & Flavors</a>
+      <a href="#craft" class="mobile-link block px-3 py-2 rounded-xl text-base font-medium text-brand-text hover:bg-brand-pink-light hover:text-brand-pink">Our Craft</a>
+      <a href="#locations" class="mobile-link block px-3 py-2 rounded-xl text-base font-medium text-brand-text hover:bg-brand-purple-light hover:text-brand-purple">Locations & Hours</a>
+    </div>
+  </header>
+
+  <main class="pt-24 sm:pt-28">
+
+    <!-- ================= HERO SECTION ================= -->
+    <section class="relative overflow-hidden py-12 lg:py-20 bg-gradient-to-b from-brand-purple-light/40 via-transparent to-brand-bg">
+      <div class="absolute top-10 left-10 w-72 h-72 bg-brand-pink/15 rounded-full filter blur-3xl -z-10 pointer-events-none"></div>
+      <div class="absolute bottom-10 right-10 w-96 h-96 bg-brand-purple/15 rounded-full filter blur-3xl -z-10 pointer-events-none"></div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          
+          <div class="lg:col-span-7 text-center lg:text-left space-y-6">
+            <div class="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-white border border-brand-pink/30 shadow-sm">
+              <span class="w-2.5 h-2.5 rounded-full bg-brand-pink animate-pulse"></span>
+              <span class="text-xs font-semibold text-brand-purple uppercase tracking-wider">Handcrafted Artisanal Gelato</span>
+            </div>
+
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-serif text-brand-text leading-tight">
+              Award-winning gelato, <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-purple via-brand-pink to-brand-pink-dark italic">Handmade, since 2016</span>.
+            </h1>
+
+            <p class="text-base sm:text-lg text-brand-muted max-w-2xl mx-auto lg:mx-0 font-light">
+              Hand-made beside the seaside with organic local milk, slow-churned artisan techniques, and hand-selected natural ingredients.
+            </p>
+
+            <div class="pt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start space-y-3 sm:space-y-0 sm:space-x-4">
+              <a href="#menu" class="w-full sm:w-auto px-8 py-4 rounded-full text-white bg-brand-pink hover:bg-brand-pink-dark shadow-md hover:shadow-lg transition-all duration-300 font-medium text-center transform hover:-translate-y-0.5">
+                Explore Flavors
+              </a>
+              <a href="#locations" class="w-full sm:w-auto px-8 py-4 rounded-full text-brand-purple bg-white hover:bg-brand-purple-light border border-brand-purple/20 transition-all duration-300 font-medium text-center">
+                Visit Our Shops
+              </a>
+            </div>
+
+            <div class="pt-8 border-t border-brand-pink/20 grid grid-cols-3 gap-4 max-w-lg mx-auto lg:mx-0 text-center">
+              <div>
+                <div class="text-2xl font-bold text-brand-purple">100%</div>
+                <div class="text-xs text-brand-muted">Natural Ingredients</div>
+              </div>
+              <div>
+                <div class="text-2xl font-bold text-brand-pink">25</div>
+                <div class="text-xs text-brand-muted">Flavours, 5 Vegan</div>
+              </div>
+              <div>
+                <div class="text-2xl font-bold text-brand-purple">Since</div>
+                <div class="text-xs text-brand-muted">2016 in Morecambe</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hero Graphic replaced with Tub.jpg -->
+          <div class="lg:col-span-5 flex justify-center items-center">
+            <div class="relative w-full max-w-md aspect-square flex items-center justify-center p-6">
+              <div class="absolute inset-4 rounded-full bg-gradient-to-tr from-brand-pink/20 to-brand-purple/20 animate-pulse"></div>
+              <img src="Tub.jpg" alt="Mio Gelato Tub" class="relative z-10 w-full max-w-xs drop-shadow-2xl rounded-3xl" />
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ================= FLAVORS & MENU SHOWCASE ================= -->
+    <section id="menu" class="pt-0 pb-16 sm:pb-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12 lg:mb-20">
+        <span class="inline-block px-8 py-3 rounded-full text-2xl sm:text-4xl font-serif font-semibold bg-brand-purple-light text-brand-purple">Open 7 Days</span>
+      </div>
+
+      <img src="menu.jpg" alt="Mio Gelato menu: handmade gelato, hot drinks, cold drinks, hot puddings and sharing boards" class="w-full h-auto rounded-3xl shadow-sm border border-brand-purple/10" />
+    </section>
+
+
+    <!-- ================= CRAFT & QUALITY SECTION ================= -->
+    <section id="craft" class="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <div class="lg:col-span-12 space-y-6 max-w-3xl mx-auto w-full">
+          <span class="text-xs font-bold text-brand-pink uppercase tracking-widest">Handmade • Fresh • Delicious</span>
+          <h2 class="text-3xl sm:text-4xl font-serif text-brand-text">Created in Morecambe, Since 2016</h2>
+          <p class="text-brand-muted leading-relaxed">
+            All of our award-winning gelato is made by hand in Morecambe beside the seaside. Served from our shops in Morecambe and Lancaster, including several dairy-free and vegan-suitable choices.
+          </p>
+
+          <div class="space-y-4 pt-2">
+            <div class="flex items-start space-x-4">
+              <div class="p-3 rounded-2xl bg-brand-purple-light text-brand-purple">
+                <i class="fa-solid fa-mug-hot text-xl"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-brand-text">Award-Winning Coffee</h4>
+                <p class="text-xs sm:text-sm text-brand-muted">Sourced proudly from Exchange Coffee Company, Clitheroe.</p>
+              </div>
+            </div>
+
+            <div class="flex items-start space-x-4">
+              <div class="p-3 rounded-2xl bg-brand-pink-light text-brand-pink">
+                <i class="fa-solid fa-lemon text-xl"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-brand-text">Real Sun-Ripened Fruit</h4>
+                <p class="text-xs sm:text-sm text-brand-muted">Zero artificial syrups, food dyes, or artificial preservatives.</p>
+              </div>
+            </div>
+
+            <div class="flex items-start space-x-4">
+              <div class="p-3 rounded-2xl bg-brand-purple-light text-brand-purple">
+                <i class="fa-solid fa-snowflake text-xl"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-brand-text">Fresh Batch Daily</h4>
+                <p class="text-xs sm:text-sm text-brand-muted">Small batches crafted every morning with organic local dairy.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ================= LOCATIONS & HOURS ================= -->
+    <section id="locations" class="py-16 sm:py-24 bg-brand-purple-light/30 border-t border-brand-purple/10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-2xl mx-auto mb-12">
+          <span class="text-xs font-bold text-brand-purple uppercase tracking-widest block mb-2">Visit Our Gelaterias</span>
+          <h2 class="text-3xl sm:text-4xl font-serif text-brand-text">Locations & Opening Hours</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          
+          <!-- Morecambe Shop -->
+          <div class="bg-white p-8 rounded-3xl shadow-sm border border-brand-purple/10 flex flex-col justify-between">
+            <div>
+              <div class="flex justify-between items-start mb-4">
+                <div>
+                  <span class="text-xs font-semibold text-brand-pink uppercase tracking-wider">Morecambe Shop</span>
+                  <h3 class="text-2xl font-serif text-brand-text">Marine Road Central</h3>
+                </div>
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-brand-purple-light text-brand-purple">Open 7 Days</span>
+              </div>
+              
+              <p class="text-sm text-brand-muted mb-4"><a href="https://www.google.com/maps/search/?api=1&query=Mio%20Gelato%2C%20272%20Marine%20Road%20Central%2C%20Morecambe%2C%20LA4%205BX" target="_blank" rel="noopener" class="hover:text-brand-purple hover:underline transition-colors"><i class="fa-solid fa-location-dot text-brand-purple mr-2"></i>272 Marine Road Central, Morecambe, LA4 5BX</a></p>
+
+              <div class="space-y-2 text-sm text-brand-text border-t border-gray-100 pt-4">
+                <div class="flex justify-between">
+                  <span class="text-brand-muted">Wednesday - Friday:</span>
+                  <span class="font-medium">12:00 PM – 5:00 PM</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-brand-muted">Saturday - Sunday:</span>
+                  <span class="font-medium">11:00 AM – 5:00 PM</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-gray-100 flex items-center justify-between">
+              <span class="text-xs text-brand-muted"><i class="fa-solid fa-phone text-brand-pink mr-1"></i> 01524 419606</span>
+            </div>
+          </div>
+
+          <!-- Lancaster Shop -->
+          <div class="bg-white p-8 rounded-3xl shadow-sm border border-brand-purple/10 flex flex-col justify-between">
+            <div>
+              <div class="flex justify-between items-start mb-4">
+                <div>
+                  <span class="text-xs font-semibold text-brand-purple uppercase tracking-wider">Lancaster Shop</span>
+                  <h3 class="text-2xl font-serif text-brand-text">New Street</h3>
+                </div>
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-brand-purple-light text-brand-purple">Open 7 Days</span>
+              </div>
+              
+              <p class="text-sm text-brand-muted mb-4"><a href="https://www.google.com/maps/search/?api=1&query=Mio%20Gelato%2C%2026%20New%20Street%2C%20Lancaster%2C%20LA1%201EG" target="_blank" rel="noopener" class="hover:text-brand-purple hover:underline transition-colors"><i class="fa-solid fa-location-dot text-brand-purple mr-2"></i>26 New Street, Lancaster, LA1 1EG</a></p>
+
+              <div class="space-y-2 text-sm text-brand-text border-t border-gray-100 pt-4">
+                <div class="flex justify-between">
+                  <span class="text-brand-muted">Monday - Saturday:</span>
+                  <span class="font-medium">11:30 AM – 5:00 PM</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-brand-muted">Sunday:</span>
+                  <span class="font-medium">11:00 AM – 4:30 PM</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-gray-100 flex items-center justify-between">
+              <span class="text-xs text-brand-muted"><i class="fa-solid fa-phone text-brand-pink mr-1"></i> 01524 956682</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="bg-brand-text text-white py-12 border-t border-gray-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+        
+        <div class="md:col-span-2 space-y-4">
+          <div class="flex items-center space-x-2">
+            <div class="text-2xl font-light">
+              <span class="text-brand-purple">mio</span>
+              <span class="text-brand-pink">gelato</span>
+            </div>
+          </div>
+          <p class="text-xs text-gray-400 font-brand-sub tracking-wider">
+            <span class="text-brand-pink">hand made</span> • <span class="text-brand-purple">fresh</span> • <span class="text-brand-purple">delicious</span>
+          </p>
+          <p class="text-xs text-gray-400 max-w-sm leading-relaxed">
+            Award-winning gelato created in Morecambe, since 2016. Hand-made beside the seaside!
+          </p>
+        </div>
+
+        <div>
+          <h4 class="text-xs font-bold text-gray-300 uppercase tracking-wider mb-4">Navigation</h4>
+          <ul class="space-y-2 text-xs text-gray-400">
+            <li><a href="#menu" class="hover:text-brand-pink transition-colors">Gelato Menu</a></li>
+            <li><a href="#craft" class="hover:text-brand-pink transition-colors">Our Craft & Coffee</a></li>
+            <li><a href="#locations" class="hover:text-brand-purple transition-colors">Store Locations</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-xs font-bold text-gray-300 uppercase tracking-wider mb-4">Contact & Follow</h4>
+          <div class="flex space-x-4 mb-4">
+            <a href="#" class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-gray-300 hover:bg-brand-pink hover:text-white transition-all"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-gray-300 hover:bg-brand-pink hover:text-white transition-all"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-gray-300 hover:bg-brand-pink hover:text-white transition-all"><i class="fa-brands fa-tiktok"></i></a>
+          </div>
+          <p class="text-xs text-gray-400">info@miogelato.co.uk</p>
+        </div>
+
+      </div>
+
+      <div class="pt-8 border-t border-gray-800 flex flex-col sm:flex-row justify-between items-center text-xs text-gray-500">
+        <p>© 2026 Mio Gelato. Award-winning gelato created in Morecambe, since 2016. All rights reserved.</p>
+        <p class="mt-2 sm:mt-0">Official website: miogelato.co.uk</p>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ================= NOTIFICATION TOAST ================= -->
+  <div id="notification-toast" class="fixed bottom-5 right-5 z-50 bg-brand-text text-white px-5 py-3 rounded-2xl shadow-xl flex items-center space-x-3 transform translate-y-20 opacity-0 transition-all duration-300">
+    <i class="fa-solid fa-circle-check text-brand-pink text-lg" id="toast-icon"></i>
+    <span class="text-sm font-medium" id="toast-message">Notification</span>
+  </div>
+
+
+  <!-- ================= JAVASCRIPT LOGIC ================= -->
+  <script>
+    const GELATO_FLAVORS = [
+      { id: 'crema', name: 'Crema (Vanilla)', type: 'regular', color: '#fef3c7' },
+      { id: 'belgian-chocolate', name: 'Belgian Milk Chocolate', type: 'regular', color: '#5d4037' },
+      { id: 'raspberry-ripple', name: 'Raspberry Ripple', type: 'regular', color: '#f49795' },
+      { id: 'mint-chip', name: 'Mint Chocolate Chip', type: 'regular', color: '#a7f3d0' },
+      { id: 'cherry-amaretti', name: 'Cherry & Amaretti Biscuit', type: 'regular', color: '#f472b6' },
+      { id: 'pistachio', name: 'Pistachio', type: 'premium', tag: '£1 extra', color: '#a3be8c' },
+      { id: 'kinder-bueno', name: 'Kinder Bueno', type: 'regular', color: '#fde68a' },
+      { id: 'chocolate-honeycomb', name: 'Chocolate Honeycomb', type: 'regular', color: '#d97706' },
+      { id: 'fig-mascarpone', name: 'Fig & Mascarpone', type: 'regular', color: '#cbd5e1' },
+      { id: 'oreo', name: 'Oreo', type: 'regular', color: '#475569' },
+      { id: 'lemon-ginger', name: 'Lemon & Ginger Biscuit', type: 'regular', color: '#fef08a' },
+      { id: 'lotus-biscoff', name: 'Lotus Biscoff', type: 'regular', color: '#b45309' },
+      { id: 'salted-caramel', name: 'Salted Caramel', type: 'regular', color: '#f59e0b' },
+      { id: 'tiramisu', name: 'Tiramisu', type: 'regular', color: '#78350f' },
+      { id: 'white-choc-chip', name: 'White Chocolate Chip', type: 'regular', color: '#fef3c7' },
+      { id: 'vegan-oreo', name: 'Vegan Oreo', type: 'vegan', isVegan: true, color: '#334155' },
+      { id: 'vegan-biscoff', name: 'Vegan Biscoff', type: 'vegan', isVegan: true, color: '#92400e' },
+      { id: 'berry-sorbet', name: 'Mixed Berry Sorbet', type: 'vegan', isVegan: true, color: '#e11d48' },
+      { id: 'dark-choc-sorbet', name: 'Dark Chocolate Sorbet', type: 'vegan', isVegan: true, color: '#3f2e27' },
+      { id: 'mango-sorbet', name: 'Mango Sorbet', type: 'vegan', isVegan: true, color: '#fbbf24' },
+      { id: 'guest-flavours', name: 'Guest Flavours', type: 'special', tag: 'Rotated Weekly', color: '#8172b8' }
+    ];
+
+    const HOT_DRINKS = [
+      { name: 'Americano', price: '£3.30' },
+      { name: 'Latte', price: '£3.75' },
+      { name: 'Cappuccino', price: '£3.75' },
+      { name: 'Flat White', price: '£3.50' },
+      { name: 'Espresso', price: '£2.70' },
+      { name: 'Macchiato', price: '£2.90' },
+      { name: 'Mocha', price: '£4.50' },
+      { name: 'Hot Chocolate', price: '£4.00' },
+      { name: 'White Chocolate', price: '£4.30' },
+      { name: 'Chai Latte', price: '£3.80' },
+      { name: 'Matcha Latte', price: '£3.80' },
+      { name: 'Breakfast Tea', price: '£2.70' }
+    ];
+
+    const COLD_DRINKS = [
+      { name: 'Frappe', price: '£5.50', desc: 'coffee, vanilla, chocolate' },
+      { name: 'Milkshake', price: '£6.50', desc: 'choose two scoops of gelato' },
+      { name: 'Affogato', price: '£6.00', desc: 'scoop of gelato, with espresso poured over' },
+      { name: 'Mineral Water', price: '£1.75' },
+      { name: 'Cans', price: '£2.25' },
+      { name: 'Glass Bottles', price: '£2.75' },
+      { name: 'Cartons', price: '£1.25' }
+    ];
+
+    const HOT_PUDDINGS = [
+      { name: 'Apple Crumble', price: '£7.00', note: 'vegan option available' },
+      { name: 'Sticky Toffee', price: '£7.00', note: 'gluten free' },
+      { name: 'Cherry Bakewell', price: '£7.00', note: 'served warm with gelato' }
+    ];
+
+    const SHARING_BOARDS = [
+      { name: 'Sharing Board for Two', price: '£20.00', desc: 'Six flavours of gelato, plus toppings and sauce' },
+      { name: 'Sharing Board for Four', price: '£40.00', desc: 'Six flavours of gelato, plus extra toppings and sauce' }
+    ];
+
+    document.addEventListener('DOMContentLoaded', () => {
+      setupMobileMenu();
+    });
+
+    function setupMobileMenu() {
+      const btn = document.getElementById('mobile-menu-btn');
+      const menu = document.getElementById('mobile-menu');
+      const links = document.querySelectorAll('.mobile-link');
+
+      btn.addEventListener('click', () => {
+        menu.classList.toggle('hidden');
+      });
+
+      links.forEach(l => {
+        l.addEventListener('click', () => {
+          menu.classList.add('hidden');
+        });
+      });
+    }
+  </script>
+</body>
+</html>
